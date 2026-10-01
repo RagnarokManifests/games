@@ -12632,6 +12632,8 @@ mod online_fix_tests {
             eprintln!("{id}: {got:?}");
         }
     }
+}
+
 fn load_local_env() {
     let mut candidates = vec![
         std::path::PathBuf::from(".env"),

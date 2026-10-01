@@ -1,0 +1,91 @@
+[package]
+name = "Ragnarok-launcher"
+version = "2.2.6"
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "1.5", features = [] }
+
+[dependencies]
+# Exactly the API surface the frontend uses, instead of "api-all".
+# `api-all` corresponds to allowlist.all = true, which made every Tauri JS
+# API — fs read/write, shell execute, http, clipboard, process, os,
+# global shortcuts — callable from the webview. What the UI actually calls is
+# the six below (see the allowlist in tauri.conf.json, which must stay in
+# sync with this list or tauri-build fails the build).
+tauri = { version = "1.8", features = [
+    "system-tray",
+    "dialog-open",
+    "dialog-save",
+    "path-all",
+    "shell-open",
+    "window-show",
+    "window-set-title",
+    "protocol-asset",
+] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+# default-tls (native-tls) uses Windows' own Schannel for TLS — when a
+# user's Windows install has a broken/corrupted Schannel (wrong system
+# clock, a security tool doing broken HTTPS interception, a damaged cert
+# store), EVERY HTTPS call this app makes fails with the same
+# SEC_E_INVALID_TOKEN error, even the curl.exe subprocess fallback (it also
+# goes through Schannel on Windows). rustls-tls is a pure-Rust TLS stack
+# with its own bundled root CA set — it never touches Schannel or the
+# Windows cert store at all, so it isn't affected by whatever's broken
+# there. default-features = false drops native-tls entirely so reqwest
+# doesn't have to be told which backend to use anywhere it's constructed.
+reqwest = { version = "0.11", default-features = false, features = ["json", "multipart", "rustls-tls", "gzip", "brotli", "stream"] }
+futures = "0.3"
+flate2 = "1.0"
+zip = "0.6"
+opener = "0.6"
+log = "0.4"
+env_logger = "0.10"
+dirs = "5.0"
+chrono = "0.4"
+image = { version = "0.25", default-features = false, features = ["jpeg"] }
+# Pure-Rust JPEG encoder with chroma subsampling + optimised Huffman tables,
+# which `image`'s own encoder lacks, and a decoder that reads the cached covers
+# correctly (see encode_cover in main.rs).
+jpeg-encoder = "0.6"
+jpeg-decoder = { version = "0.3", default-features = false }
+# Reads the sound a player picks for achievement popups (mp3/ogg/wav/flac/m4a)
+# so it can be played through the same PlaySound path as the built-in one.
+symphonia = { version = "0.5", default-features = false, features = ["mp3", "ogg", "vorbis", "wav", "pcm", "flac", "isomp4", "aac"] }
+sysinfo = { version = "0.30", default-features = false }
+discord-rich-presence = "0.2"
+urlencoding = "2.1"
+regex = "1.10"
+is_elevated = "0.1.2"
+unrar-ng = "0.7.7"
+walkdir = "2.4"
+winreg = "0.52"
+sevenz-rust = { version = "0.5", features = ["aes256"] }
+aes-gcm = "0.10"
+sha2 = "0.10"
+once_cell = "1.19"
+once = "0.2"
+zeroize = "1.5"
+base64 = "0.22"
+
+[features]
+# this feature is used for production builds or when `devPath` points to the filesystem
+# DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]
+
+# Optimized release build: maximum speed + smaller binary
+[profile.release]
+opt-level = 3           # maximum optimization
+lto = "thin"            # thin LTO: fast inter-crate optimization without locking issues
+codegen-units = 1       # changed to 1 to avoid os error 32
+strip = "symbols"       # strip debug symbols → smaller .exe
+panic = "abort"         # leaner panic handling
+
+# Dev builds: codegen-units=1 + incremental=false prevent os error 32
+# (Windows file-locking race when multiple rustc threads touch the same .o files)
+[profile.dev]
+opt-level = 0
+incremental = false
+codegen-units = 1

@@ -1,0 +1,16 @@
+[package]
+name = "ach_helper"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "ach_helper"
+path = "src/main.rs"
+
+[build-dependencies]
+winres = "0.1"
+
+[profile.release]
+opt-level = 2
+panic = "abort"
+strip = true

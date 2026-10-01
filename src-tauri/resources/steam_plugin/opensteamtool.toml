@@ -1,0 +1,32 @@
+[general]
+# OpenSteamTool Configuration
+
+[log]
+# Verbosity for <Steam>/opensteamtool/*.log — set to debug temporarily to
+# diagnose the -onlinefix achievements issue.
+level = "debug"
+
+[unlock]
+enabled = true
+
+[manifest]
+# Upstream API for depot manifest request codes.
+# Options: "manifestdex"
+url = "manifestdex"
+
+[stats]
+# Query https://stats.opensteamtool.com/{appid} for achievements when no Lua setStat is configured.
+# Priority: setStat > stats API > hardcoded preset SteamID
+enable_api = true
+
+[lua]
+# Additional Lua config directories (optional).
+# Files in these paths are loaded AFTER the default <Steam>/config/lua/ folder.
+paths = []
+
+[inject]
+# Optional DLL injection into game processes.
+# The injected library must match the target process architecture.
+enabled = false
+# library_x64 = "OpenSteamTool.GameHook.x64.dll"
+# library_x86 = "OpenSteamTool.GameHook.x86.dll"

@@ -1,0 +1,17 @@
+[build]
+# Limit parallel jobs to prevent os error 32 (file locking race) on Windows.
+# Windows Defender scans .o files in real-time; too many concurrent rustc threads
+# cause collisions when trying to delete/replace object files simultaneously.
+jobs = 2
+
+[target.x86_64-pc-windows-msvc]
+# Statically link the MSVC C/C++ runtime into the binary instead of dynamically
+# linking against MSVCP140.dll/VCRUNTIME140.dll. Without this, the exe fails
+# to launch on a clean Windows install with "no se encontró MSVCP140.dll" —
+# that DLL comes from the Microsoft Visual C++ Redistributable, which most
+# PCs have only because some other app dragged it in, not because Windows
+# ships it. Static linking removes that external dependency entirely.
+rustflags = ["-C", "target-feature=+crt-static"]
+
+[target.i686-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]

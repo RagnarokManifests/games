@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Theme variables (dark = default) --- */
+:root {
+  --accent-color: 220 38 38;
+  --rl-bg-primary: #0f1016;
+  --rl-bg-secondary: #1a1b26;
+  --rl-bg-deep: #0a0a0c;
+  --rl-text-primary: #ffffff;
+  --rl-text-muted: #9ca3af;
+  --rl-border: rgba(255, 255, 255, 0.05);
+  --glass-blur: 12px;
+}
+
+/* Light mode overrides */
+html.light {
+  --rl-bg-primary: #f0f4f8;
+  --rl-bg-secondary: #ffffff;
+  --rl-bg-deep: #e2e8f0;
+  --rl-text-primary: #0f172a;
+  --rl-text-muted: #64748b;
+  --rl-border: rgba(0, 0, 0, 0.08);
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--rl-bg-primary);
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+/* Dynamic Glassmorphism Override — safe blur without !important to avoid GPU crashes on multi-monitor */
+.backdrop-blur-3xl,
+.backdrop-blur-2xl,
+.backdrop-blur-xl,
+.backdrop-blur-lg,
+.backdrop-blur-md,
+.backdrop-blur,
+.backdrop-blur-sm {
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+

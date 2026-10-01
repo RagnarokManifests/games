@@ -1,0 +1,111 @@
+{
+  "package": {
+    "productName": "ragnarok-launcher",
+    "version": "2.2.6"
+  },
+  "build": {
+    "distDir": "../dist",
+    "devPath": "http://localhost:5173",
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run dev"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "dialog": {
+        "open": true,
+        "save": true
+      },
+      "path": {
+        "all": true
+      },
+      "shell": {
+        "open": "^https?://"
+      },
+      "window": {
+        "show": true,
+        "setTitle": true
+      },
+      "protocol": {
+        "asset": true,
+        "assetScope": [
+          "**",
+          "C:/**",
+          "D:/**",
+          "E:/**",
+          "F:/**",
+          "G:/**",
+          "H:/**",
+          "$VIDEO/**",
+          "$PICTURES/**",
+          "$DOWNLOAD/**",
+          "$DESKTOP/**",
+          "$DOCUMENT/**"
+        ]
+      }
+    },
+    "windows": [
+      {
+        "title": "Ragnarok Launcher",
+        "width": 1280,
+        "height": 720,
+        "resizable": true,
+        "fullscreen": false,
+        "center": true,
+        "visible": false
+      }
+    ],
+    "systemTray": {
+      "iconPath": "icons/icon.ico",
+      "iconAsTemplate": false
+    },
+    "bundle": {
+      "active": true,
+      "copyright": "© 2026 Sheaker. All rights reserved.",
+      "publisher": "Sheaker",
+      "targets": [
+        "nsis",
+        "app"
+      ],
+      "identifier": "com.ragnarok.launcher",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "windows": {
+        "nsis": {
+          "displayLanguageSelector": false,
+          "languages": [
+            "Spanish"
+          ],
+          "installMode": "currentUser"
+        }
+      },
+      "resources": [
+        "resources/ach_helper_x64.exe",
+        "resources/ach_helper_x86.exe",
+        "resources/steam_plugin/OpenSteamTool.dll",
+        "resources/steam_plugin/dwmapi.dll",
+        "resources/steam_plugin/dwmapi.exp",
+        "resources/steam_plugin/dwmapi.lib",
+        "resources/steam_plugin/lua_static.lib",
+        "resources/steam_plugin/opensteamtool.toml",
+        "resources/steam_plugin/xinput1_4.dll",
+        "resources/steam_plugin/xinput1_4.exp",
+        "resources/steam_plugin/xinput1_4.lib",
+        "resources/steam_plugin/opensteamtool/pattern/steamclient/3eda3b0a618c07037c4ef7496c6d69769e90519baf4c1c08daf79786448273e9.toml",
+        "resources/steam_plugin/opensteamtool/pattern/steamclient/86112382982fa855086f566b2fb8343290e798849029337dcfeecba0d5051b5e.toml",
+        "resources/steam_plugin/opensteamtool/pattern/steamui/af6ca9193dd6d502fad83d4a51ea29fe156699c2dfcf5739f9f70ca659d2b83d.toml",
+        "resources/steam_plugin/opensteamtool/pattern/steamui/f35533b57f5b4c8a7c1325be26cc63ec2ba43a998c3c2bf81a1701498ba99335.toml",
+        "resources/steam_plugin/opensteamtool/ipc/steamclient/3eda3b0a618c07037c4ef7496c6d69769e90519baf4c1c08daf79786448273e9.toml",
+        "resources/steam_plugin/opensteamtool/ipc/steamclient/86112382982fa855086f566b2fb8343290e798849029337dcfeecba0d5051b5e.toml"
+      ]
+    },
+    "security": {
+      "csp": "default-src 'self'; script-src 'self' 'unsafe-eval'; img-src 'self' asset: https://asset.localhost http://asset.localhost https://*.steamstatic.com https://*.akamaihd.net https://shared.akamai.steamstatic.com https://i.ytimg.com https://images.unsplash.com https://www.nintendo.com https://img-eshop.cdn.nintendo.net https://*.nintendo.net https://*.nintendo-europe.com data: blob: https://eggnsemulator.com https://*.eggnsemulator.com https://projectnx.org https://*.projectnx.org https://dlpsgame.com https://*.dlpsgame.com https://romsfun.com https://*.romsfun.com https://cdn.discordapp.com https://media.discordapp.net https://*.discordapp.com https://*.discordapp.net; media-src 'self' asset: https://asset.localhost http://asset.localhost https://*.steamstatic.com https://*.akamaihd.net https://video.akamai.steamstatic.com https://video.cloudflare.steamstatic.com https://cdn.akamai.steamstatic.com https://cdn.cloudflare.steamstatic.com https://steamcdn-a.akamaihd.net data: blob:; frame-src https://www.youtube-nocookie.com https://www.youtube.com; connect-src 'self' asset: https://asset.localhost http://asset.localhost https://video.akamai.steamstatic.com https://video.cloudflare.steamstatic.com https://*.steampowered.com https://api.steamcmd.net https://raw.githubusercontent.com https://api.github.com https://www.youtube.com https://discord.com https://discordapp.com https://eggnsemulator.com https://*.eggnsemulator.com https://projectnx.org https://*.projectnx.org https://dlpsgame.com https://*.dlpsgame.com https://romsfun.com https://*.romsfun.com https://cdn.discordapp.com https://media.discordapp.net https://*.discordapp.com https://*.discordapp.net"
+    }
+  }
+}

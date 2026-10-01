@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+src-tauri/target/
+src-tauri/ach_helper/target/
+target-temp/
+LumaCore_Release/
+extracted_windows/
+
+# Other AI CLI tools & IDE local configs
+.kimi/
+.opencode/
+.kiro/
+.vscode/
+.idea/
+*.bak
+*.backup
+
+# Vite temporary files
+vite.config.ts.timestamp-*
+
+# Scratch scripts, temporary tests and debug dumps
+scratch*
+test*.txt
+test*.py
+parse_gdrive*.py
+gdrive_debug.txt
+gdrive.html
+egg.html
+bioshock.json
+ragnarok_fixer.ps1
+new_homeview.txt
+support-proxy/
+archivos de OpenSteamTool/
+
+# Environment files (never commit API keys or private tokens)
+.env
+.env.*
+!.env.example
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+.DS_Store

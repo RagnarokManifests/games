@@ -12632,9 +12632,43 @@ mod online_fix_tests {
             eprintln!("{id}: {got:?}");
         }
     }
+fn load_local_env() {
+    let mut candidates = vec![
+        std::path::PathBuf::from(".env"),
+        std::path::PathBuf::from("src-tauri/.env"),
+    ];
+    if let Ok(exe) = std::env::current_exe() {
+        if let Some(parent) = exe.parent() {
+            candidates.push(parent.join(".env"));
+        }
+    }
+    if let Some(data_dir) = dirs::data_dir() {
+        candidates.push(data_dir.join("ragnarok").join(".env"));
+    }
+    for path in &candidates {
+        if path.exists() {
+            if let Ok(content) = std::fs::read_to_string(path) {
+                for line in content.lines() {
+                    let line = line.trim();
+                    if line.starts_with('#') || line.is_empty() {
+                        continue;
+                    }
+                    if let Some((k, v)) = line.split_once('=') {
+                        let k = k.trim();
+                        let v = v.trim().trim_matches('"').trim_matches('\'');
+                        if std::env::var(k).is_err() {
+                            std::env::set_var(k, v);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 fn main() {
+    load_local_env();
+
     // Hidden one-time setup for the Ragnarok Legends GitHub token — run
     // manually from a terminal as:
     //   Ragnarok-launcher.exe --set-legends-token <token>

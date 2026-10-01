@@ -84,3 +84,16 @@ This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**
 > - Doing so is a direct violation of international copyright law.
 
 See the full [LICENSE](LICENSE) file for complete legal details.
+
+---
+
+## 🛡️ Code Signing & Verification
+
+Free code signing provided by the [SignPath Foundation](https://signpath.org).
+
+---
+
+## 🔒 Privacy Policy
+
+Ragnarok Launcher respects user privacy. See [PRIVACY.md](PRIVACY.md) for details.
+

@@ -14,6 +14,14 @@
 
 ---
 
+## 🎬 Demo
+
+[![Ragnarok Launcher Demo](https://img.youtube.com/vi/dP_kPZXMXWQ/maxresdefault.jpg)](https://www.youtube.com/watch?v=dP_kPZXMXWQ)
+
+> *Click the thumbnail to watch the full demo on YouTube*
+
+---
+
 ## ✨ Features
 
 - **Blazing Fast Native Backend**: Built with Rust and Tauri for minimal memory footprint and maximum performance.
